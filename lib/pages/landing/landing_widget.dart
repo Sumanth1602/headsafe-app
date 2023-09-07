@@ -378,7 +378,7 @@ class _LandingWidgetState extends State<LandingWidget>
                               children: [
                                 Flexible(
                                   child: Align(
-                                    alignment: AlignmentDirectional(1.0, 1.0),
+                                    alignment: AlignmentDirectional(1.00, 1.00),
                                     child: FlutterFlowIconButton(
                                       borderColor: Colors.transparent,
                                       borderRadius: 30.0,
@@ -452,7 +452,8 @@ class _LandingWidgetState extends State<LandingWidget>
                                 children: [
                                   Flexible(
                                     child: Align(
-                                      alignment: AlignmentDirectional(1.0, 1.0),
+                                      alignment:
+                                          AlignmentDirectional(1.00, 1.00),
                                       child: FlutterFlowIconButton(
                                         borderColor: Colors.transparent,
                                         borderRadius: 30.0,
@@ -596,8 +597,8 @@ class _LandingWidgetState extends State<LandingWidget>
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 44.0, 0.0, 0.0),
                                 child: FFButtonWidget(
-                                  onPressed: () {
-                                    print('Button pressed ...');
+                                  onPressed: () async {
+                                    context.pushNamed('uploadscreen');
                                   },
                                   text: 'Get Started',
                                   options: FFButtonOptions(
