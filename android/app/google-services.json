@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "186196755116",
+    "project_id": "helmetdetection-365c8",
+    "storage_bucket": "helmetdetection-365c8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:186196755116:android:bb50cc69a53071d35cd509",
+        "android_client_info": {
+          "package_name": "com.mycompany.helmetdetection"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "186196755116-2c1tb55801lu8sdam3ibdba67d46uoo2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mycompany.helmetdetection",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "186196755116-jshht2n48e17obhjpc6d9o200139dq3u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmSfglM0QrscHexeAFU8EZH0fkks0I4as"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "186196755116-jshht2n48e17obhjpc6d9o200139dq3u.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "186196755116-am5kvel5u5bvjuvbuga311armjfa6678.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mycompany.helmetdetection"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
