@@ -35,17 +35,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
-      errorBuilder: (context, state) => LandingWidget(),
+      errorBuilder: (context, state) => UploadscreenWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => LandingWidget(),
-        ),
-        FFRoute(
-          name: 'IconPage',
-          path: '/iconPage',
-          builder: (context, params) => IconPageWidget(),
+          builder: (context, _) => UploadscreenWidget(),
         ),
         FFRoute(
           name: 'landing',
