@@ -1,3 +1,4 @@
+import '/backend/firebase_storage/storage.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -155,7 +156,10 @@ class _UploadscreenWidgetState extends State<UploadscreenWidget>
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(12.0),
                       child: Image.network(
-                        'https://picsum.photos/seed/867/600',
+                        valueOrDefault<String>(
+                          _model.uploadedFileUrl1,
+                          'https://picsum.photos/seed/867/600',
+                        ),
                         width: double.infinity,
                         height: 314.0,
                         fit: BoxFit.cover,
@@ -203,7 +207,13 @@ class _UploadscreenWidgetState extends State<UploadscreenWidget>
                               setState(() => _model.isDataUploading1 = true);
                               var selectedUploadedFiles = <FFUploadedFile>[];
 
+                              var downloadUrls = <String>[];
                               try {
+                                showUploadMessage(
+                                  context,
+                                  'Uploading file...',
+                                  showLoading: true,
+                                );
                                 selectedUploadedFiles = selectedMedia
                                     .map((m) => FFUploadedFile(
                                           name: m.storagePath.split('/').last,
@@ -213,17 +223,34 @@ class _UploadscreenWidgetState extends State<UploadscreenWidget>
                                           blurHash: m.blurHash,
                                         ))
                                     .toList();
+
+                                downloadUrls = (await Future.wait(
+                                  selectedMedia.map(
+                                    (m) async => await uploadData(
+                                        m.storagePath, m.bytes),
+                                  ),
+                                ))
+                                    .where((u) => u != null)
+                                    .map((u) => u!)
+                                    .toList();
                               } finally {
+                                ScaffoldMessenger.of(context)
+                                    .hideCurrentSnackBar();
                                 _model.isDataUploading1 = false;
                               }
                               if (selectedUploadedFiles.length ==
-                                  selectedMedia.length) {
+                                      selectedMedia.length &&
+                                  downloadUrls.length == selectedMedia.length) {
                                 setState(() {
                                   _model.uploadedLocalFile1 =
                                       selectedUploadedFiles.first;
+                                  _model.uploadedFileUrl1 = downloadUrls.first;
                                 });
+                                showUploadMessage(context, 'Success!');
                               } else {
                                 setState(() {});
+                                showUploadMessage(
+                                    context, 'Failed to upload data');
                                 return;
                               }
                             }

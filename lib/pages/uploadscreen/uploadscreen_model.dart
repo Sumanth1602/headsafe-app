@@ -1,3 +1,4 @@
+import '/backend/firebase_storage/storage.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -17,6 +18,7 @@ class UploadscreenModel extends FlutterFlowModel {
   bool isDataUploading1 = false;
   FFUploadedFile uploadedLocalFile1 =
       FFUploadedFile(bytes: Uint8List.fromList([]));
+  String uploadedFileUrl1 = '';
 
   bool isDataUploading2 = false;
   FFUploadedFile uploadedLocalFile2 =
