@@ -77,12 +77,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
-      errorBuilder: (context, state) => appStateNotifier.loggedIn ? () : (),
+      errorBuilder: (context, state) =>
+          appStateNotifier.loggedIn ? LandingWidget() : IconPageWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => appStateNotifier.loggedIn ? () : (),
+          builder: (context, _) =>
+              appStateNotifier.loggedIn ? LandingWidget() : IconPageWidget(),
         ),
         FFRoute(
           name: 'IconPage',
@@ -93,6 +95,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'landing',
           path: '/landing',
           builder: (context, params) => LandingWidget(),
+        ),
+        FFRoute(
+          name: 'uploadscreen',
+          path: '/uploadscreen',
+          builder: (context, params) => UploadscreenWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -259,7 +266,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.location);
-            return '/';
+            return '/iconPage';
           }
           return null;
         },
