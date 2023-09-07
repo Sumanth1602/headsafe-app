@@ -42,44 +42,47 @@ class _SplashscreenWidgetState extends State<SplashscreenWidget> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
-      child: Scaffold(
-        key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        body: SafeArea(
-          top: true,
-          child: Align(
-            alignment: AlignmentDirectional(0.00, 0.00),
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Align(
-                  alignment: AlignmentDirectional(0.00, 0.00),
-                  child: Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(60.0, 0.0, 0.0, 0.0),
-                    child: Icon(
-                      Icons.sports_motorsports_outlined,
-                      color: FlutterFlowTheme.of(context).primaryText,
-                      size: 50.0,
-                    ),
-                  ),
-                ),
-                Flexible(
-                  child: Align(
+      child: WillPopScope(
+        onWillPop: () async => false,
+        child: Scaffold(
+          key: scaffoldKey,
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+          body: SafeArea(
+            top: true,
+            child: Align(
+              alignment: AlignmentDirectional(0.00, 0.00),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Align(
                     alignment: AlignmentDirectional(0.00, 0.00),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 50.0, 0.0),
-                      child: Text(
-                        'HeadSafe',
-                        textAlign: TextAlign.center,
-                        style: FlutterFlowTheme.of(context).displayMedium,
+                          EdgeInsetsDirectional.fromSTEB(60.0, 0.0, 0.0, 0.0),
+                      child: Icon(
+                        Icons.sports_motorsports_outlined,
+                        color: FlutterFlowTheme.of(context).primaryText,
+                        size: 50.0,
                       ),
                     ),
                   ),
-                ),
-              ],
+                  Flexible(
+                    child: Align(
+                      alignment: AlignmentDirectional(0.00, 0.00),
+                      child: Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 50.0, 0.0),
+                        child: Text(
+                          'HeadSafe',
+                          textAlign: TextAlign.center,
+                          style: FlutterFlowTheme.of(context).displayMedium,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -143,34 +144,93 @@ class _UploadscreenWidgetState extends State<UploadscreenWidget>
                       style: FlutterFlowTheme.of(context).labelLarge,
                     ),
                   ),
-                  Container(
-                    width: 100.0,
-                    height: 53.0,
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
-                    ),
-                  ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(12.0),
-                      child: Image.network(
-                        valueOrDefault<String>(
-                          _model.uploadedFileUrl1,
-                          'https://picsum.photos/seed/867/600',
+                        EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 50.0),
+                    child: InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () async {
+                        final selectedMedia =
+                            await selectMediaWithSourceBottomSheet(
+                          context: context,
+                          imageQuality: 42,
+                          allowPhoto: true,
+                        );
+                        if (selectedMedia != null &&
+                            selectedMedia.every((m) =>
+                                validateFileFormat(m.storagePath, context))) {
+                          setState(() => _model.isDataUploading = true);
+                          var selectedUploadedFiles = <FFUploadedFile>[];
+
+                          var downloadUrls = <String>[];
+                          try {
+                            selectedUploadedFiles = selectedMedia
+                                .map((m) => FFUploadedFile(
+                                      name: m.storagePath.split('/').last,
+                                      bytes: m.bytes,
+                                      height: m.dimensions?.height,
+                                      width: m.dimensions?.width,
+                                      blurHash: m.blurHash,
+                                    ))
+                                .toList();
+
+                            downloadUrls = (await Future.wait(
+                              selectedMedia.map(
+                                (m) async =>
+                                    await uploadData(m.storagePath, m.bytes),
+                              ),
+                            ))
+                                .where((u) => u != null)
+                                .map((u) => u!)
+                                .toList();
+                          } finally {
+                            _model.isDataUploading = false;
+                          }
+                          if (selectedUploadedFiles.length ==
+                                  selectedMedia.length &&
+                              downloadUrls.length == selectedMedia.length) {
+                            setState(() {
+                              _model.uploadedLocalFile =
+                                  selectedUploadedFiles.first;
+                              _model.uploadedFileUrl = downloadUrls.first;
+                            });
+                          } else {
+                            setState(() {});
+                            return;
+                          }
+                        }
+                      },
+                      child: Container(
+                        width: 407.0,
+                        height: 239.0,
+                        decoration: BoxDecoration(
+                          color:
+                              FlutterFlowTheme.of(context).secondaryBackground,
+                          image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: Image.network(
+                              ' ',
+                            ).image,
+                          ),
                         ),
-                        width: double.infinity,
-                        height: 314.0,
-                        fit: BoxFit.cover,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(8.0),
+                          child: CachedNetworkImage(
+                            fadeInDuration: Duration(milliseconds: 0),
+                            fadeOutDuration: Duration(milliseconds: 0),
+                            imageUrl: valueOrDefault<String>(
+                              _model.uploadedFileUrl,
+                              'https://picsum.photos/seed/488/600',
+                            ),
+                            width: 300.0,
+                            height: 200.0,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                  Container(
-                    width: 100.0,
-                    height: 65.0,
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
                     ),
                   ),
                   Padding(
@@ -192,89 +252,24 @@ class _UploadscreenWidgetState extends State<UploadscreenWidget>
                       child: Padding(
                         padding:
                             EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
-                        child: InkWell(
-                          splashColor: Colors.transparent,
-                          focusColor: Colors.transparent,
-                          hoverColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          onTap: () async {
-                            final selectedMedia = await selectMedia(
-                              multiImage: false,
-                            );
-                            if (selectedMedia != null &&
-                                selectedMedia.every((m) => validateFileFormat(
-                                    m.storagePath, context))) {
-                              setState(() => _model.isDataUploading1 = true);
-                              var selectedUploadedFiles = <FFUploadedFile>[];
-
-                              var downloadUrls = <String>[];
-                              try {
-                                showUploadMessage(
-                                  context,
-                                  'Uploading file...',
-                                  showLoading: true,
-                                );
-                                selectedUploadedFiles = selectedMedia
-                                    .map((m) => FFUploadedFile(
-                                          name: m.storagePath.split('/').last,
-                                          bytes: m.bytes,
-                                          height: m.dimensions?.height,
-                                          width: m.dimensions?.width,
-                                          blurHash: m.blurHash,
-                                        ))
-                                    .toList();
-
-                                downloadUrls = (await Future.wait(
-                                  selectedMedia.map(
-                                    (m) async => await uploadData(
-                                        m.storagePath, m.bytes),
-                                  ),
-                                ))
-                                    .where((u) => u != null)
-                                    .map((u) => u!)
-                                    .toList();
-                              } finally {
-                                ScaffoldMessenger.of(context)
-                                    .hideCurrentSnackBar();
-                                _model.isDataUploading1 = false;
-                              }
-                              if (selectedUploadedFiles.length ==
-                                      selectedMedia.length &&
-                                  downloadUrls.length == selectedMedia.length) {
-                                setState(() {
-                                  _model.uploadedLocalFile1 =
-                                      selectedUploadedFiles.first;
-                                  _model.uploadedFileUrl1 = downloadUrls.first;
-                                });
-                                showUploadMessage(context, 'Success!');
-                              } else {
-                                setState(() {});
-                                showUploadMessage(
-                                    context, 'Failed to upload data');
-                                return;
-                              }
-                            }
-                          },
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Icon(
-                                Icons.camera_alt,
-                                color: FlutterFlowTheme.of(context).primary,
-                                size: 32.0,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Icon(
+                              Icons.camera_alt,
+                              color: FlutterFlowTheme.of(context).primary,
+                              size: 32.0,
+                            ),
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  16.0, 0.0, 0.0, 0.0),
+                              child: Text(
+                                'Open Camera',
+                                textAlign: TextAlign.center,
+                                style: FlutterFlowTheme.of(context).bodyMedium,
                               ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 0.0, 0.0, 0.0),
-                                child: Text(
-                                  'Open Camera',
-                                  textAlign: TextAlign.center,
-                                  style:
-                                      FlutterFlowTheme.of(context).bodyMedium,
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                     ).animateOnPageLoad(
@@ -299,119 +294,35 @@ class _UploadscreenWidgetState extends State<UploadscreenWidget>
                       child: Padding(
                         padding:
                             EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
-                        child: InkWell(
-                          splashColor: Colors.transparent,
-                          focusColor: Colors.transparent,
-                          hoverColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          onTap: () async {
-                            final selectedMedia = await selectMedia(
-                              mediaSource: MediaSource.photoGallery,
-                              multiImage: false,
-                            );
-                            if (selectedMedia != null &&
-                                selectedMedia.every((m) => validateFileFormat(
-                                    m.storagePath, context))) {
-                              setState(() => _model.isDataUploading2 = true);
-                              var selectedUploadedFiles = <FFUploadedFile>[];
-
-                              try {
-                                selectedUploadedFiles = selectedMedia
-                                    .map((m) => FFUploadedFile(
-                                          name: m.storagePath.split('/').last,
-                                          bytes: m.bytes,
-                                          height: m.dimensions?.height,
-                                          width: m.dimensions?.width,
-                                          blurHash: m.blurHash,
-                                        ))
-                                    .toList();
-                              } finally {
-                                _model.isDataUploading2 = false;
-                              }
-                              if (selectedUploadedFiles.length ==
-                                  selectedMedia.length) {
-                                setState(() {
-                                  _model.uploadedLocalFile2 =
-                                      selectedUploadedFiles.first;
-                                });
-                              } else {
-                                setState(() {});
-                                return;
-                              }
-                            }
-                          },
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Icon(
-                                Icons.photo,
-                                color: FlutterFlowTheme.of(context).primary,
-                                size: 32.0,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Icon(
+                              Icons.photo,
+                              color: FlutterFlowTheme.of(context).primary,
+                              size: 32.0,
+                            ),
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  16.0, 0.0, 0.0, 0.0),
+                              child: Text(
+                                'Open Gallery',
+                                textAlign: TextAlign.center,
+                                style: FlutterFlowTheme.of(context).bodyMedium,
                               ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 0.0, 0.0, 0.0),
-                                child: Text(
-                                  'Open Gallery',
-                                  textAlign: TextAlign.center,
-                                  style:
-                                      FlutterFlowTheme.of(context).bodyMedium,
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                     ).animateOnPageLoad(
                         animationsMap['containerOnPageLoadAnimation2']!),
                   ),
-                  Container(
-                    width: 100.0,
-                    height: 48.0,
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
-                    ),
-                  ),
                   Padding(
                     padding:
                         EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 12.0),
                     child: FFButtonWidget(
-                      onPressed: () async {
-                        final selectedMedia =
-                            await selectMediaWithSourceBottomSheet(
-                          context: context,
-                          allowPhoto: true,
-                        );
-                        if (selectedMedia != null &&
-                            selectedMedia.every((m) =>
-                                validateFileFormat(m.storagePath, context))) {
-                          setState(() => _model.isDataUploading3 = true);
-                          var selectedUploadedFiles = <FFUploadedFile>[];
-
-                          try {
-                            selectedUploadedFiles = selectedMedia
-                                .map((m) => FFUploadedFile(
-                                      name: m.storagePath.split('/').last,
-                                      bytes: m.bytes,
-                                      height: m.dimensions?.height,
-                                      width: m.dimensions?.width,
-                                      blurHash: m.blurHash,
-                                    ))
-                                .toList();
-                          } finally {
-                            _model.isDataUploading3 = false;
-                          }
-                          if (selectedUploadedFiles.length ==
-                              selectedMedia.length) {
-                            setState(() {
-                              _model.uploadedLocalFile3 =
-                                  selectedUploadedFiles.first;
-                            });
-                          } else {
-                            setState(() {});
-                            return;
-                          }
-                        }
+                      onPressed: () {
+                        print('Button pressed ...');
                       },
                       text: 'Detect',
                       icon: Icon(
