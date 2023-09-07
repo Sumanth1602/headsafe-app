@@ -3,23 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>186196755116-am5kvel5u5bvjuvbuga311armjfa6678.apps.googleusercontent.com</string>
+	<string>149138161544-0cm83qp4s4v00ofa19e2ah54q16ouims.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.186196755116-am5kvel5u5bvjuvbuga311armjfa6678</string>
-	<key>ANDROID_CLIENT_ID</key>
-	<string>186196755116-2c1tb55801lu8sdam3ibdba67d46uoo2.apps.googleusercontent.com</string>
+	<string>com.googleusercontent.apps.149138161544-0cm83qp4s4v00ofa19e2ah54q16ouims</string>
 	<key>API_KEY</key>
-	<string>AIzaSyARNfr4MBAYuwxd4tTMOU8q7SvI0AAycbE</string>
+	<string>AIzaSyAcgpwfyhZFY4YBFe_6Uw37miTFKGAko7I</string>
 	<key>GCM_SENDER_ID</key>
-	<string>186196755116</string>
+	<string>149138161544</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.mycompany.helmetdetection</string>
 	<key>PROJECT_ID</key>
-	<string>helmetdetection-365c8</string>
+	<string>headsafe-b9a5b</string>
 	<key>STORAGE_BUCKET</key>
-	<string>helmetdetection-365c8.appspot.com</string>
+	<string>headsafe-b9a5b.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -31,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:186196755116:ios:b4eaa3064a3d02095cd509</string>
+	<string>1:149138161544:ios:ba703de7e527939b4a443d</string>
 </dict>
 </plist>
