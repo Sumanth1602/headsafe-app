@@ -27,7 +27,7 @@ class _SplashscreenWidgetState extends State<SplashscreenWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      context.pushNamed('landing');
+      context.goNamed('landing');
     });
   }
 

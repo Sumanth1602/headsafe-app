@@ -309,11 +309,6 @@ class _LandingWidgetState extends State<LandingWidget>
     super.initState();
     _model = createModel(context, () => LandingModel());
 
-    // On page load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      context.pushNamed('landing');
-    });
-
     setupAnimations(
       animationsMap.values.where((anim) =>
           anim.trigger == AnimationTrigger.onActionTrigger ||
@@ -602,8 +597,8 @@ class _LandingWidgetState extends State<LandingWidget>
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 44.0, 0.0, 0.0),
                                 child: FFButtonWidget(
-                                  onPressed: () {
-                                    print('Button pressed ...');
+                                  onPressed: () async {
+                                    context.pushNamed('uploadscreen');
                                   },
                                   text: 'Get Started',
                                   options: FFButtonOptions(
