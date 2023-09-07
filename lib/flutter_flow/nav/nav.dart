@@ -35,17 +35,22 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
-      errorBuilder: (context, state) => UploadscreenWidget(),
+      errorBuilder: (context, state) => SplashscreenWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => UploadscreenWidget(),
+          builder: (context, _) => SplashscreenWidget(),
         ),
         FFRoute(
           name: 'landing',
           path: '/landing',
           builder: (context, params) => LandingWidget(),
+        ),
+        FFRoute(
+          name: 'splashscreen',
+          path: '/splashscreen',
+          builder: (context, params) => SplashscreenWidget(),
         ),
         FFRoute(
           name: 'uploadscreen',

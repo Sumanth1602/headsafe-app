@@ -309,6 +309,11 @@ class _LandingWidgetState extends State<LandingWidget>
     super.initState();
     _model = createModel(context, () => LandingModel());
 
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      context.pushNamed('landing');
+    });
+
     setupAnimations(
       animationsMap.values.where((anim) =>
           anim.trigger == AnimationTrigger.onActionTrigger ||
@@ -378,7 +383,7 @@ class _LandingWidgetState extends State<LandingWidget>
                               children: [
                                 Flexible(
                                   child: Align(
-                                    alignment: AlignmentDirectional(1.0, 1.0),
+                                    alignment: AlignmentDirectional(1.00, 1.00),
                                     child: FlutterFlowIconButton(
                                       borderColor: Colors.transparent,
                                       borderRadius: 30.0,
@@ -452,7 +457,8 @@ class _LandingWidgetState extends State<LandingWidget>
                                 children: [
                                   Flexible(
                                     child: Align(
-                                      alignment: AlignmentDirectional(1.0, 1.0),
+                                      alignment:
+                                          AlignmentDirectional(1.00, 1.00),
                                       child: FlutterFlowIconButton(
                                         borderColor: Colors.transparent,
                                         borderRadius: 30.0,
