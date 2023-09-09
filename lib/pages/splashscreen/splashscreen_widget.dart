@@ -27,7 +27,16 @@ class _SplashscreenWidgetState extends State<SplashscreenWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      context.goNamed('landing');
+      context.goNamed(
+        'landing',
+        extra: <String, dynamic>{
+          kTransitionInfoKey: TransitionInfo(
+            hasTransition: true,
+            transitionType: PageTransitionType.bottomToTop,
+            duration: Duration(milliseconds: 2000),
+          ),
+        },
+      );
     });
   }
 

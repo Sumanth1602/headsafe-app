@@ -367,7 +367,7 @@ class _LandingWidgetState extends State<LandingWidget>
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 12.0, 0.0, 20.0),
                               child: Text(
-                                'This app is created to create awareness of the tehethetehe',
+                                'HeadSafe App - where cutting-edge tech meets real-time reinforcement for safer rides and a brighter, more aware tomorrow.',
                                 style: FlutterFlowTheme.of(context).labelMedium,
                               ).animateOnPageLoad(
                                   animationsMap['textOnPageLoadAnimation2']!),
