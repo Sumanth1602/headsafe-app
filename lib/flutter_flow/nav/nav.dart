@@ -78,14 +78,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? LandingWidget() : SplashscreenWidget(),
+          appStateNotifier.loggedIn ? UploadscreenWidget() : LandingWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) => appStateNotifier.loggedIn
-              ? LandingWidget()
-              : SplashscreenWidget(),
+              ? UploadscreenWidget()
+              : LandingWidget(),
         ),
         FFRoute(
           name: 'landing',
@@ -267,7 +267,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.location);
-            return '/splashscreen';
+            return '/landing';
           }
           return null;
         },
@@ -280,15 +280,11 @@ class FFRoute {
                 )
               : builder(context, ffParams);
           final child = appStateNotifier.loading
-              ? Center(
-                  child: SizedBox(
-                    width: 50.0,
-                    height: 50.0,
-                    child: CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        FlutterFlowTheme.of(context).primary,
-                      ),
-                    ),
+              ? Container(
+                  color: FlutterFlowTheme.of(context).primaryBackground,
+                  child: Image.asset(
+                    'assets/images/splash2.png',
+                    fit: BoxFit.none,
                   ),
                 )
               : page;

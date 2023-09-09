@@ -44,16 +44,16 @@ final jwtTokenStream = FirebaseAuth.instance
     .asBroadcastStream();
 
 DocumentReference? get currentUserReference =>
-    loggedIn ? UserRecord.collection.doc(currentUser!.uid) : null;
+    loggedIn ? UsersRecord.collection.doc(currentUser!.uid) : null;
 
-UserRecord? currentUserDocument;
+UsersRecord? currentUserDocument;
 final authenticatedUserStream = FirebaseAuth.instance
     .authStateChanges()
     .map<String>((user) => user?.uid ?? '')
     .switchMap(
       (uid) => uid.isEmpty
           ? Stream.value(null)
-          : UserRecord.getDocument(UserRecord.collection.doc(uid))
+          : UsersRecord.getDocument(UsersRecord.collection.doc(uid))
               .handleError((_) {}),
     )
     .map((user) => currentUserDocument = user)

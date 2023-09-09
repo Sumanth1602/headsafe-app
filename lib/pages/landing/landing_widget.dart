@@ -3,7 +3,6 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart'
     as smooth_page_indicator;
 import 'package:cached_network_image/cached_network_image.dart';
@@ -368,7 +367,7 @@ class _LandingWidgetState extends State<LandingWidget>
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 12.0, 0.0, 20.0),
                               child: Text(
-                                'This app is created to create awareness of the tehethetehe',
+                                'HeadSafe App - where cutting-edge tech meets real-time reinforcement for safer rides and a brighter, more aware tomorrow.',
                                 style: FlutterFlowTheme.of(context).labelMedium,
                               ).animateOnPageLoad(
                                   animationsMap['textOnPageLoadAnimation2']!),
@@ -417,7 +416,7 @@ class _LandingWidgetState extends State<LandingWidget>
                         imageUrl:
                             'https://images.unsplash.com/photo-1501526029524-a8ea952b15be?crop=entropy&cs=srgb&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwxMHx8bWFjaGluZSUyMGxlYXJuaW5nfGVufDB8fHx8MTY5NDA0MjQzMXww&ixlib=rb-4.0.3&q=85',
                         width: double.infinity,
-                        height: 538.0,
+                        height: 470.0,
                         fit: BoxFit.cover,
                       ).animateOnPageLoad(
                           animationsMap['imageOnPageLoadAnimation2']!),
@@ -436,7 +435,7 @@ class _LandingWidgetState extends State<LandingWidget>
                                 animationsMap['textOnPageLoadAnimation3']!),
                             Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 12.0, 0.0, 0.0),
+                                  0.0, 12.0, 0.0, 50.0),
                               child: Text(
                                 'Use the cutting edge techonlogy for detecting helmet usage for your own images',
                                 style: FlutterFlowTheme.of(context).labelMedium,
@@ -494,7 +493,7 @@ class _LandingWidgetState extends State<LandingWidget>
                         imageUrl:
                             'https://images.unsplash.com/photo-1551288049-bebda4e38f71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwyfHxhbmFseXRpY3N8ZW58MHx8fHwxNjkzOTg0NzM2fDA&ixlib=rb-4.0.3&q=80&w=1080',
                         width: double.infinity,
-                        height: 519.0,
+                        height: 478.0,
                         fit: BoxFit.cover,
                       ).animateOnPageLoad(
                           animationsMap['imageOnPageLoadAnimation3']!),
@@ -566,68 +565,73 @@ class _LandingWidgetState extends State<LandingWidget>
                         ).image,
                       ),
                     ),
-                    child: ClipRRect(
-                      child: BackdropFilter(
-                        filter: ImageFilter.blur(
-                          sigmaX: 2.0,
-                          sigmaY: 2.0,
-                        ),
-                        child: Container(
-                          width: 100.0,
-                          height: 100.0,
-                          decoration: BoxDecoration(
-                            color: Color(0x97FFFFFF),
-                          ),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.sports_motorsports,
-                                color: FlutterFlowTheme.of(context).primary,
-                                size: 250.0,
+                    child: Container(
+                      width: 100.0,
+                      height: 100.0,
+                      decoration: BoxDecoration(
+                        color: Color(0x4EFFFFFF),
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Opacity(
+                            opacity: 0.9,
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 20.0),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(8.0),
+                                child: CachedNetworkImage(
+                                  fadeInDuration: Duration(milliseconds: 0),
+                                  fadeOutDuration: Duration(milliseconds: 0),
+                                  imageUrl:
+                                      'https://images.unsplash.com/photo-1575396565848-e8031f12ce2a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwyfHxoZWxtZXR8ZW58MHx8fHwxNjk0MjQ2NTM3fDA&ixlib=rb-4.0.3&q=80&w=1080',
+                                  width: 237.0,
+                                  height: 200.0,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
-                              Text(
-                                'Your Journey Begins',
-                                style:
-                                    FlutterFlowTheme.of(context).headlineMedium,
-                              ).animateOnPageLoad(
-                                  animationsMap['textOnPageLoadAnimation6']!),
-                              Padding(
+                            ),
+                          ),
+                          Text(
+                            'Your Journey Begins',
+                            style: FlutterFlowTheme.of(context).headlineLarge,
+                          ).animateOnPageLoad(
+                              animationsMap['textOnPageLoadAnimation6']!),
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 40.0, 0.0, 0.0),
+                            child: FFButtonWidget(
+                              onPressed: () async {
+                                context.pushNamed('uploadscreen');
+                              },
+                              text: 'Get Started',
+                              options: FFButtonOptions(
+                                width: 200.0,
+                                height: 50.0,
                                 padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 44.0, 0.0, 0.0),
-                                child: FFButtonWidget(
-                                  onPressed: () async {
-                                    context.pushNamed('uploadscreen');
-                                  },
-                                  text: 'Get Started',
-                                  options: FFButtonOptions(
-                                    width: 200.0,
-                                    height: 50.0,
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
-                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
-                                    color: FlutterFlowTheme.of(context).primary,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .titleSmall
-                                        .override(
-                                          fontFamily: 'Readex Pro',
-                                          color: Colors.white,
-                                        ),
-                                    elevation: 2.0,
-                                    borderSide: BorderSide(
-                                      color: Colors.transparent,
-                                      width: 1.0,
+                                    0.0, 0.0, 0.0, 0.0),
+                                iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 0.0),
+                                color: FlutterFlowTheme.of(context).primary,
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .titleSmall
+                                    .override(
+                                      fontFamily: 'Inter',
+                                      color: Colors.white,
                                     ),
-                                    borderRadius: BorderRadius.circular(40.0),
-                                  ),
-                                ).animateOnPageLoad(animationsMap[
-                                    'buttonOnPageLoadAnimation']!),
+                                elevation: 2.0,
+                                borderSide: BorderSide(
+                                  color: Colors.transparent,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(40.0),
                               ),
-                            ],
+                            ).animateOnPageLoad(
+                                animationsMap['buttonOnPageLoadAnimation']!),
                           ),
-                        ),
+                        ],
                       ),
                     ),
                   ).animateOnPageLoad(
